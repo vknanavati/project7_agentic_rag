@@ -25,7 +25,7 @@ CHROMA_DIR = os.path.join(
 
 # Name of the ChromaDB collection that holds our bird knowledge chunks
 # This must match exactly what Project 5 used when it created the collection
-CHROMA_COLLECTION_NAME = "birding_knowledge"
+CHROMA_COLLECTION_NAME = "birds"
 
 # --- Embedding Model ---
 # The sentence-transformers model used to convert text into vectors
