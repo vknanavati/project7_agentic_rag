@@ -48,32 +48,36 @@ You have access to the following tools:
 
 {tool_descriptions}
 
-You must follow this EXACT format on every turn. Do not deviate from it:
+CRITICAL INSTRUCTION — ONE ACTION PER RESPONSE:
+You must write EXACTLY ONE Thought, ONE Action, and ONE Action Input per response.
+Then STOP. Do not write another Thought or Action. Do not write Final Answer yet.
+Wait for the Observation (tool result) before continuing.
+Writing multiple actions in one response means none of them will execute.
+
+You must follow this EXACT format on every single response:
 
 Thought: [Reason about what you know so far and what you still need to find out. \
 If the question has multiple parts, identify each part and track which ones \
 you have answered and which ones you still need to answer.]
-Action: [The name of the tool to call. Must be one of: search_knowledge_base, \
+Action: [The name of ONE tool to call. Must be one of: search_knowledge_base, \
 keyword_search, filter_by_species, compare_species]
-Action Input: [The input to pass to the tool. A natural language query or species name.]
+Action Input: [The input to pass to the tool.]
 
-When you receive a tool result, continue with:
+After you receive an Observation, write your next single Thought + Action + Action Input.
+Repeat until you have retrieved enough evidence to fully answer the question.
 
-Thought: [Evaluate what the tool returned. Did it answer all parts of the question? \
-If not, what is still missing? Plan your next search.]
-Action: [Next tool to call]
-Action Input: [Next input]
+Only write Final Answer when you are completely satisfied that ALL parts of the \
+question have been answered with retrieved evidence:
 
-Only write the following when you are fully satisfied that ALL parts of the question \
-have been answered with retrieved evidence:
-
-Final Answer: [Your complete, well-structured answer. Cite specific birds and facts \
-from the retrieved chunks. Do not include information that was not in the retrieved chunks.]
+Final Answer: [Your complete answer grounded entirely in the retrieved chunks. \
+Do not use information that was not in the retrieved chunks.]
 
 IMPORTANT RULES:
+- ONE Thought, ONE Action, ONE Action Input per response — then stop
 - Never write Final Answer until you have retrieved evidence for every part of the question
 - If a search returns weak results, try a different tool or a different query
 - Always ground your Final Answer in the retrieved chunks — do not rely on general knowledge
+- Species names use lowercase with underscores (e.g. black_capped_chickadee, blue_jay)
 - If the knowledge base does not contain enough information to answer, say so honestly
 """
 
