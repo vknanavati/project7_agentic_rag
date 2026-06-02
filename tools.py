@@ -13,6 +13,8 @@ import config                                   # our central settings file
 
 
 # --- Tool Schemas ---
+# These descriptions are injected into the system prompt so the LLM
+# knows what tools exist, what each one does, and when to use it
 # These are plain-English descriptions of each tool, written for the LLM to read
 # The agent reads these at the start of every reasoning loop and uses them
 # to decide which tool fits the current question
