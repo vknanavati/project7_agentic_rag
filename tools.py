@@ -52,8 +52,8 @@ TOOL_SCHEMAS = {
             "the knowledge base knows about one bird. "
             "Use this when the question is clearly about one specific species."
         ),
-        "argument": "The exact common name of the bird species (e.g. 'Black-capped Chickadee').",
-        "example": "filter_by_species('Black-capped Chickadee')",
+        "argument": "The exact species name using underscores and lowercase (e.g. 'black_capped_chickadee').",
+        "example": "filter_by_species('black_capped_chickadee')",
     },
     "compare_species": {
         "name": "compare_species",
@@ -62,8 +62,8 @@ TOOL_SCHEMAS = {
             "Best for comparison questions asking how two birds differ or are similar. "
             "Use this when the question explicitly compares two species."
         ),
-        "argument": "Two bird species names separated by a comma (e.g. 'Blue Jay, American Crow').",
-        "example": "compare_species('Blue Jay, American Crow')",
+        "argument": "Two species names in lowercase with underscores, separated by a comma (e.g. 'blue_jay, american_crow').",
+        "example": "compare_species('blue_jay, american_crow')",
     },
 }
 
