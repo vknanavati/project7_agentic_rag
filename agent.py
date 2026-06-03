@@ -66,11 +66,15 @@ Action Input: [The input to pass to the tool.]
 After you receive an Observation, write your next single Thought + Action + Action Input.
 Repeat until you have retrieved enough evidence to fully answer the question.
 
-Only write Final Answer when you are completely satisfied that ALL parts of the \
-question have been answered with retrieved evidence:
+Only when you are completely satisfied that ALL parts of the question have been \
+answered with retrieved evidence, write your response in this exact format:
 
 Final Answer: [Your complete answer grounded entirely in the retrieved chunks. \
 Do not use information that was not in the retrieved chunks.]
+
+CRITICAL: "Final Answer:" is NOT a tool. Do not write it under Action. \
+Write it as a standalone line starting with "Final Answer:" followed immediately \
+by your answer. Never write "Action: Final Answer".
 
 IMPORTANT RULES:
 - ONE Thought, ONE Action, ONE Action Input per response — then stop
