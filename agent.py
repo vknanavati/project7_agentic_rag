@@ -72,9 +72,8 @@ answered with retrieved evidence, write your response in this exact format:
 Final Answer: [Your complete answer grounded entirely in the retrieved chunks. \
 Do not use information that was not in the retrieved chunks.]
 
-CRITICAL: "Final Answer:" is NOT a tool. Do not write it under Action. \
-Write it as a standalone line starting with "Final Answer:" followed immediately \
-by your answer. Never write "Action: Final Answer".
+CRITICAL: "Final Answer:" is NOT a tool. Do not write it under Action. Write it as a standalone line starting with "Final Answer:" followed immediately by your answer. Never write "Action: Final Answer".
+If you have enough information to answer, do NOT write "Action: None". Instead write "Final Answer:" followed immediately by your answer on the same line.
 
 IMPORTANT RULES:
 - ONE Thought, ONE Action, ONE Action Input per response — then stop
@@ -249,7 +248,22 @@ def run_agent(question, collection, embedding_model, verbose=True):
         # --- Step 4: Call the Tool ---
         # The LLM wrote a tool name and input — run the actual Python function
         tool_name = parsed["action"]                    # which tool to call
-        tool_input = parsed["action_input"].strip("'\"") # strip quotes the LLM added
+        tool_input = parsed["action_input"].strip("'\"")  # strip quotes the LLM added
+
+        # If the agent wrote "None" as the action it means it is done but
+        # forgot to write Final Answer — prompt it explicitly to write one
+        if tool_name.lower() in ["none", "", "n/a"]:
+            if verbose:
+                print("\nAgent signaled done without Final Answer — prompting for it.")
+            messages.append({
+                "role": "assistant",
+                "content": llm_output,
+            })
+            messages.append({
+                "role": "user",
+                "content": "You have enough information. Now write your Final Answer:",
+            })
+            continue                                     # go back to top of loop to get the answer
 
         if verbose:
             print(f"\nThought: {parsed['thought']}")
