@@ -191,6 +191,8 @@ def run_agent(question, collection, embedding_model, verbose=True):
         {"role": "user", "content": question},                  # the user's question
     ]
 
+    time.sleep(3)
+
     if verbose:
         print(f"\n{'='*60}")
         print(f"Question: {question}")
