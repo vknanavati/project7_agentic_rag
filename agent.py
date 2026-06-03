@@ -172,7 +172,7 @@ def format_tool_result(tool_name, tool_input, results):
         text = result["text"]                                    # the chunk text itself
 
         lines.append(f"[Chunk {i}] Species: {species} | Score: {score}")
-        lines.append(text[:300])                              # the actual retrieved text
+        lines.append(text[:200])                              # the actual retrieved text
         lines.append("")                                # blank line between chunks
 
     return "\n".join(lines)                             # join everything into one string
@@ -248,7 +248,7 @@ def run_agent(question, collection, embedding_model, verbose=True):
         # --- Step 4: Call the Tool ---
         # The LLM wrote a tool name and input — run the actual Python function
         tool_name = parsed["action"]                    # which tool to call
-        tool_input = parsed["action_input"]             # what to pass to it
+        tool_input = parsed["action_input"].strip("'\"") # strip quotes the LLM added
 
         if verbose:
             print(f"\nThought: {parsed['thought']}")
@@ -275,6 +275,12 @@ def run_agent(question, collection, embedding_model, verbose=True):
             "role": "user",                             # tool results go in as a user message
             "content": f"Observation:\n{formatted_result}",  # labeled as an Observation
         })
+
+        # Keep conversation history from growing too large
+        # Always preserve: system prompt (index 0) and original question (index 1)
+        # Keep only the last 6 messages after those two
+        if len(messages) > 8:                           # system + question + 6 recent messages
+            messages = messages[:2] + messages[-6:]     # slice to keep first 2 and last 6
 
     # --- Max Iterations Reached ---
     # The loop ran out of attempts without a Final Answer
