@@ -64,7 +64,7 @@ MIN_RELEVANCE_SCORE = 0.3
 # Maximum number of reasoning iterations before the agent is forced to stop
 # Prevents infinite loops if the LLM never writes "Final Answer"
 # Analogy: a timer on a test — you must hand in your paper after 8 attempts whether you're done or not
-MAX_ITERATIONS = 8
+MAX_ITERATIONS = 12
 
 # The exact string the agent must write to signal it has finished reasoning
 # Our loop checks for this string in every LLM response
