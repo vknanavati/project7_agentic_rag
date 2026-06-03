@@ -168,7 +168,7 @@ def format_tool_result(tool_name, tool_input, results):
         text = result["text"]                                    # the chunk text itself
 
         lines.append(f"[Chunk {i}] Species: {species} | Score: {score}")
-        lines.append(text)                              # the actual retrieved text
+        lines.append(text[:300])                              # the actual retrieved text
         lines.append("")                                # blank line between chunks
 
     return "\n".join(lines)                             # join everything into one string
