@@ -75,7 +75,7 @@ Do not use information that was not in the retrieved chunks.]
 IMPORTANT RULES:
 - ONE Thought, ONE Action, ONE Action Input per response — then stop
 - Never write Final Answer until you have retrieved evidence for every part of the question
-- If a search returns weak results, try a different tool or a different query
+- If search_knowledge_base returns weak or off-topic results after two tries, switch to keyword_search with specific terms like 'cache', 'caching', 'store food', 'food storage'
 - Always ground your Final Answer in the retrieved chunks — do not rely on general knowledge
 - Species names use lowercase with underscores (e.g. black_capped_chickadee, blue_jay)
 - If the knowledge base does not contain enough information to answer, say so honestly
