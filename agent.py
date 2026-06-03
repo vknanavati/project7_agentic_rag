@@ -82,7 +82,8 @@ IMPORTANT RULES:
 - If search_knowledge_base returns weak or off-topic results after two tries, switch to keyword_search with specific terms like 'cache', 'caching', 'store food', 'food storage'
 - Always ground your Final Answer in the retrieved chunks — do not rely on general knowledge
 - Species names use lowercase with underscores (e.g. black_capped_chickadee, blue_jay)
-- If the knowledge base does not contain enough information to answer, say so honestly
+- If after 4 searches you still cannot find specific evidence for part of the question, write a Final Answer that shares what you did find and honestly states that the knowledge base does not contain enough information to fully answer the remaining parts
+- Do not keep searching indefinitely for information that may not exist in the knowledge base
 """
 
     return prompt
