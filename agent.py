@@ -189,7 +189,7 @@ def run_agent(question, collection, embedding_model, verbose=True):
         {"role": "user", "content": question},                  # the user's question
     ]
 
-    time.sleep(8)
+    time.sleep(15)
 
     if verbose:
         print(f"\n{'='*60}")
@@ -256,6 +256,16 @@ def run_agent(question, collection, embedding_model, verbose=True):
             messages.append({
                 "role": "user",
                 "content": "You have enough information. Now write your Final Answer:",
+            })
+            # After 4 iterations, explicitly tell the agent to stop searching and commit
+        if iterations >= 4:
+            messages.append({
+                "role": "user",
+                "content": (
+                    "You have now completed 4 or more searches. "
+                    "Stop searching and write your Final Answer now using whatever evidence you have collected. "
+                    "If some parts of the question are not covered by the knowledge base, say so honestly."
+                ),
             })
             continue                                     # go back to top of loop to get the answer
 
